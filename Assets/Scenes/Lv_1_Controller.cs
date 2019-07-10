@@ -12,6 +12,10 @@ public class Lv_1_Controller : MonoBehaviour{
     public AudioClip attackClip;
     public AudioSource jumpSound;
     public AudioClip jumpClip;
+    public AudioSource bgSound;
+    public AudioClip bgClip;
+    public AudioSource chestSound;
+    public AudioClip chestClip;
     public GUISkin mySkin;
     public GUISkin mySkin2;
     public GUISkin mySkin3;
@@ -37,6 +41,9 @@ public class Lv_1_Controller : MonoBehaviour{
     {
         attackSound.clip = attackClip;
         jumpSound.clip = jumpClip;
+        bgSound.clip = bgClip;
+        chestSound.clip = chestClip;
+        bgSound.Play();
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
         InvokeRepeating("repeat", 1, 3);
@@ -50,7 +57,7 @@ public class Lv_1_Controller : MonoBehaviour{
 
     void Update()
     {
-        if(transform.position.y < 0)
+        if (transform.position.y < 0)
         {
             dead = true;
         }
@@ -68,7 +75,7 @@ public class Lv_1_Controller : MonoBehaviour{
             {
                 textFinish.text = "Finish";
                 nextLvl = true;
-                //getItem = false;
+                bgSound.Stop();
             }
         }
         else
@@ -101,6 +108,7 @@ public class Lv_1_Controller : MonoBehaviour{
         {
             if (Input.GetKey(KeyCode.W))
             {
+                
                 if (anim.GetBool("attacking") == true)
                 {
                     return;
@@ -168,7 +176,6 @@ public class Lv_1_Controller : MonoBehaviour{
             }
             if (Input.GetKeyUp(KeyCode.W))
             {
-                //walkSound.Stop();
                 anim.SetBool("running", false);
                 anim.SetInteger("condition", 0);
                 moveDir = new Vector3(0, 0, 0);
@@ -176,7 +183,6 @@ public class Lv_1_Controller : MonoBehaviour{
 
             if (Input.GetKey(KeyCode.S))
             {
-                //walkSound.Play();
                 if (anim.GetBool("attacking") == true)
                 {
                     return;
@@ -245,6 +251,7 @@ public class Lv_1_Controller : MonoBehaviour{
     {
         if (attack)
         {
+            chestSound.Play();
             gameItem.transform.position = new Vector3(-20, -20, -20);
             gameItemObject.transform.position = new Vector3(-20, -20, -20);
             getItem = true;

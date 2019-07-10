@@ -9,6 +9,8 @@ public class Lv_2_Controller : MonoBehaviour
     public AudioClip attackClip;
     public AudioSource jumpSound;
     public AudioClip jumpClip;
+    public AudioSource chestSound;
+    public AudioClip chestClip;
     public GUISkin mySkin;
     public GUISkin mySkin2;
     public GUISkin mySkin3;
@@ -37,6 +39,7 @@ public class Lv_2_Controller : MonoBehaviour
     {
         attackSound.clip = attackClip;
         jumpSound.clip = jumpClip;
+        chestSound.clip = chestClip;
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
         InvokeRepeating("repeat", 1, 3);
@@ -220,6 +223,7 @@ public class Lv_2_Controller : MonoBehaviour
     {
         if (attack)
         {
+            chestSound.Play();
             if (getItem == 0)
             {
                 getItem = 1;
